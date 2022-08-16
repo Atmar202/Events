@@ -59,37 +59,41 @@
                 <div class="col-lg-4 col-form-label"></div>
                 <div class="col-sm-8 px-3 py-1">
                     <div class="form-check form-check-inline pe-5">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="eraisik" checked>
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="eraisik" onclick="checkRadio()">
                         <label class="form-check-label" for="inlineRadio1">Eraisik</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="juriidiline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="juriidiline" onclick="checkRadio()">
                         <label class="form-check-label" for="inlineRadio2">Ettevõte</label>
                     </div>
                 </div>
             </div>
+
+
+            <!-- ERAISIKU FORM -->
+            <div id="eraisik" style="display: none;">
             <div class="form-group row p-1">
                 <label for="inputNimi" class="col-lg-4 col-form-label">Eesnimi:</label>
                 <div class="col-sm-8">
-                    <input type="nimi" class="form-control" id="inputNimi">
+                   <input type="nimi" class="form-control" id="inputNimi" required>
                 </div>
             </div>
             <div class="form-group row p-1">
                 <label for="inputAeg" class="col-lg-4 col-form-label">Perenimi:</label>
                 <div class="col-sm-8">
-                    <input type="aeg" class="form-control" id="inputAeg">
+                        <input type="aeg" class="form-control" id="inputAeg" required>
                 </div>
             </div>
             <div class="form-group row p-1">
                 <label for="inputKoht" class="col-lg-4 col-form-label">Isikukood:</label>
                 <div class="col-sm-8">
-                    <input type="koht" class="form-control" id="inputKoht">
+                        <input type="koht" class="form-control" id="inputKoht" required>
                 </div>
             </div>
             <div class="form-group row p-1">
                 <label for="FormSelect" class="col-lg-4 col-form-label">Maksmisviis:</label>
                 <div class="col-sm-8">
-                    <select type="maksmisviis" class="form-select" id="FormSelect">
+                        <select type="maksmisviis" class="form-select" id="FormSelect" required>
                         <option>Sularaha</option>
                         <option>Pangaülekanne</option>
                     </select>
@@ -101,8 +105,48 @@
                     <textarea class="form-control" id="inputInfo" type="info" rows="3"></textarea>
                 </div>
             </div>
+        </div>
+
+            <!-- ETTEVÕTE FORM -->
+            <div id="juriidiline" style="display: none;">
+                <div class="form-group row p-1">
+                    <label for="inputNimi" class="col-lg-4 col-form-label">Juriidiline nimi:</label>
+                    <div class="col-sm-8">
+                        <input type="nimi" class="form-control" id="inputNimi" required>
+                    </div>
+                </div>
+                <div class="form-group row p-1">
+                    <label for="inputAeg" class="col-lg-4 col-form-label">Registrikood:</label>
+                    <div class="col-sm-8">
+                        <input type="aeg" class="form-control" id="inputAeg" required>
+                    </div>
+                </div>
+                <div class="form-group row p-1">
+                    <label for="inputKoht" class="col-lg-4 col-form-label">Osavõtjate arv:</label>
+                    <div class="col-sm-8">
+                        <input type="koht" class="form-control" id="inputKoht" required>
+                    </div>
+                </div>
+                <div class="form-group row p-1">
+                    <label for="FormSelect" class="col-lg-4 col-form-label">Maksmiseviis:</label>
+                    <div class="col-sm-8">
+                        <select type="maksmisviis" class="form-select" id="FormSelect" required>
+                            <option>Sularaha</option>
+                            <option>Pangaülekanne</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row p-1">
+                    <label for="inputInfo" class="col-lg-4 col-form-label">Lisainfo:</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" id="inputInfo" type="info" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+
             <div class="mt-5">
                 <a onclick="history.back()" class="btn py-1 m-1" style="background-color: #e1e1e1;">Tagasi</a>
+                <!-- input type submit? -->
                 <button type="submit" class="btn text-white py-1 m-1" style="background-color: var(--bg);">Salvesta</button>
             </div>
         </form>
