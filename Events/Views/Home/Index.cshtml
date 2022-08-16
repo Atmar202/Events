@@ -1,8 +1,60 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Avaleht";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- HERO 1 -->
+<div class="row g-0">
+    <div class="col bg py-5">
+        <h4 class="p-5 text-center text-white">
+            Sed nec elit vestibulum, <b>tincidunt orci</b> et, sagittis ex.
+            Vestibulum rutrum <b>neque suscipit</b> ante mattis maximus. Nulla non sapien <b>viverra, lobortis lorem non,</b> accumsan metus.
+        </h4>
+    </div>
+    <div class="col">
+        <img src="~/img/pilt.jpg" class="img-fluid" width="648" height="319" alt="Pilt">
+    </div>
+</div>
+
+<!-- HERO 2 -->
+<div class="row g-0 py-4">
+    <div class="col me-3 bg-white">
+        <h4 class="bg py-3 text-center text-white">Tulevased üritused</h4>
+        <div class="row g-0 pt-3">
+            <!-- ANDMED SQL'ist -->
+            <div class="col-6 p-1">
+                <ol>
+                    <li>Nunc inbortis metus eu massa viverra ultri iplacerat nibh</li>
+                </ol>
+            </div>
+            <div class="col p-1">
+                14.02.2016
+            </div>
+            <div class="col p-1 opacity-50">
+                <a class="text-decoration-none text-uppercase text-dark fw-bold" asp-area="" asp-controller="Home" asp-action="Index">Osavõtjad</a>
+                <a class="ps-2" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/img/remove.svg" width="32" height="22" /></a>
+            </div>
+            <!-- ANDMETE LÕPP -->
+            <div class="p-3">
+                <a class="text-uppercase text-dark fw-bold opacity-50 text-decoration-none" asp-area="" asp-controller="Home" asp-action="Index">Lisa üritus</a>
+            </div>
+        </div>
+    </div>
+    <div class="col ms-3 bg-white">
+        <h4 class="bg py-3 text-center text-white">Toimunud üritused</h4>
+        <div class="row g-0 pt-3">
+            <!-- ANDMED SQL'ist -->
+            <div class="col-6 p-1">
+                <ol>
+                    <li>Aenari commodo</li>
+                </ol>
+            </div>
+            <div class="col p-1">
+                14.01.2016
+            </div>
+            <div class="col p-1 opacity-50">
+                <a class="text-decoration-none text-uppercase text-dark fw-bold" asp-area="" asp-controller="Home" asp-action="Index">Osavõtjad</a>
+            </div>
+            <!-- ANDMETE LÕPP -->
+        </div>
+    </div>
 </div>
