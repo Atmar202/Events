@@ -3,46 +3,75 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Events</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <title>@ViewData["Title"] - Üritused</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Events.styles.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Events</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    <div class="container my-4">
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - Events - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <!-- HEADER -->
+    <header class="d-flex flex-wrap justify-content-center mb-4 px-5 bg-white">
+        <img src="~/img/logo.svg" class="pe-5" alt="Logo" />
+        <div class="d-flex px-5 mb-3 mb-md-0 me-md-auto text-uppercase fw-bold">
+            <a class="p-4 nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Avaleht</a>
+            <a class="p-4 nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Ürituse lisamine</a>
+        </div>
+        <img src="~/img/symbol.svg" alt="Symbol" />
+    </header>
+
+    <main role="main">
+        @RenderBody()
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="row p-5 g-0 text-white">
+            <div class="col">
+                <h2>Curabitur</h2>
+                <ul style="list-style-type:none; padding: 0" class="text-white-50">
+                    <li>Emauris</li>
+                    <li>Kfringla</li>
+                    <li>Oin magna sem</li>
+                    <li>Kelementum</li>
+                </ul>
+            </div>
+            <div class="col">
+                <h2>Fusce</h2>
+                <ul style="list-style-type:none; padding: 0" class="text-white-50">
+                    <li>Econsectetur</li>
+                    <li>Ksollicitudin</li>
+                    <li>Omvulputate</li>
+                    <li>Nunc fringilla tellu</li>
+                </ul>
+            </div>
+            <div class="col">
+                <h2>Kontakt</h2>
+                <ul style="list-style-type:none; padding: 0" class="text-white-50">
+                    <li class="fw-bold">Peakontor: Tallinnas</li>
+                    <li>Väike-Ameerika 1, 11415 Tallinn</li>
+                    <li>Telefon: 605 4450</li>
+                    <li>Faks: 605 3186</li>
+                </ul>
+            </div>
+            <div class="col pt-5">
+                <ul style="list-style-type:none; padding: 0" class="text-white-50">
+                    <li class="fw-bold">Harukontor: Võrus</li>
+                    <li>Oja tn 7 (külastusaadress)</li>
+                    <li>Telefon: 605 3330</li>
+                    <li>Faks: 605 3155</li>
+                </ul>
+            </div>
         </div>
     </footer>
+
+    </div>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

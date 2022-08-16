@@ -1,18 +1,21 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+:root {
+    --bg: #005aa1;
 }
 
 body {
-  margin-bottom: 60px;
+    background-color: #eff2f4;
+    font-family: 'Open Sans', sans-serif;
+}
+
+footer {
+    background-color: #373737;
+}
+
+.bg {
+    background-color: var(--bg);
+}
+
+.active, .nav-link:hover {
+    color: white !important;
+    background-color: var(--bg);
 }
