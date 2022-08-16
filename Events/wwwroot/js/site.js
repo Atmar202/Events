@@ -1,4 +1,11 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿var page = window.location.pathname.split("/");
 
-// Write your JavaScript code.
+switch (page[1].toLowerCase()) {
+    case '':
+    case 'home':
+        document.getElementById("home").className = document.getElementById("home").className + " active";
+    break;
+    case 'events':
+        document.getElementById("events").className = document.getElementById("events").className + " active";
+    break;
+}
