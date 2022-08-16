@@ -1,0 +1,110 @@
+﻿@{
+    ViewData["Title"] = "Ürituse osavõtjad";
+}
+
+<!-- HERO HEADER -->
+<div class="row g-0">
+    <div class="col col-lg-3 bg p-3 text-white text-center"><h2>Osavõtjad</h2></div>
+    <div class="col" style="background-image: url('../Img/libled.jpg'); background-size: cover;"></div>
+</div>
+
+<!-- HERO -->
+<div class="bg-white mb-4">
+    <div class="col-xl-5 mx-auto p-4">
+        <h4 style="color: var(--bg);">Osavõtjad</h4>
+        <div class="row p-1 g-0">
+            <div class="form-group row p-1">
+                <h4 class="col-lg-4 col-form-label">Ürituse nimi:</h4>
+                <div class="col-sm-8 col-form-label">sql_nimi</div>
+            </div>
+            <div class="form-group row p-1">
+                <h4 class="col-lg-4 col-form-label">Toimumisaeg:</h4>
+                <div class="col-sm-8 col-form-label">sql_aeg</div>
+            </div>
+            <div class="form-group row p-1">
+                <h4 class="col-lg-4 col-form-label">Koht:</h4>
+                <div class="col-sm-8 col-form-label">sql_koht</div>
+            </div>
+            <div class="form-group row p-1">
+                <h4 class="col-lg-4 col-form-label">Osavõtjad:</h4>
+            </div>
+        </div>
+    </div>
+
+    <!-- Iga kord, kui on uus p2ring, siis tehakse ka vastavalt uus row -->
+    <!-- ANDMED SQL'ist -->
+    <small>
+        <div class="row g-0 p-1 col-sm-8 ms-auto">
+            <div class="col py-1 px-3">
+                <ol>
+                    <li>Aenari commodo</li>
+                </ol>
+            </div>
+            <div class="col py-1 px-3">
+                14.06.2022
+            </div>
+            <div class="col py-1 opacity-50 px-3">
+                <a class="px-3 text-decoration-none text-uppercase text-dark fw-bold" asp-area="" asp-controller="Participants" asp-action="Info">Vaata</a>
+                <a class="px-3 text-decoration-none text-uppercase text-dark fw-bold">Kustuta</a>
+            </div>
+        </div>
+    </small>
+    <!-- ANDMETE LÕPP -->
+
+    <div class="col-xl-5 mx-auto p-4">
+        <h4 style="color: var(--bg);">Osavõtjate lisamine</h4>
+        <!-- FORM ACTION? -->
+        <form class="mb-5">
+            <div class="form-group row p-1">
+                <div class="col-lg-4 col-form-label"></div>
+                <div class="col-sm-8 px-3 py-1">
+                    <div class="form-check form-check-inline pe-5">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="eraisik" checked>
+                        <label class="form-check-label" for="inlineRadio1">Eraisik</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="juriidiline">
+                        <label class="form-check-label" for="inlineRadio2">Ettevõte</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row p-1">
+                <label for="inputNimi" class="col-lg-4 col-form-label">Eesnimi:</label>
+                <div class="col-sm-8">
+                    <input type="nimi" class="form-control" id="inputNimi">
+                </div>
+            </div>
+            <div class="form-group row p-1">
+                <label for="inputAeg" class="col-lg-4 col-form-label">Perenimi:</label>
+                <div class="col-sm-8">
+                    <input type="aeg" class="form-control" id="inputAeg">
+                </div>
+            </div>
+            <div class="form-group row p-1">
+                <label for="inputKoht" class="col-lg-4 col-form-label">Isikukood:</label>
+                <div class="col-sm-8">
+                    <input type="koht" class="form-control" id="inputKoht">
+                </div>
+            </div>
+            <div class="form-group row p-1">
+                <label for="FormSelect" class="col-lg-4 col-form-label">Maksmisviis:</label>
+                <div class="col-sm-8">
+                    <select type="maksmisviis" class="form-select" id="FormSelect">
+                        <option>Sularaha</option>
+                        <option>Pangaülekanne</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row p-1">
+                <label for="inputInfo" class="col-lg-4 col-form-label">Lisainfo:</label>
+                <div class="col-sm-8">
+                    <textarea class="form-control" id="inputInfo" type="info" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="mt-5">
+                <a onclick="history.back()" class="btn py-1 m-1" style="background-color: #e1e1e1;">Tagasi</a>
+                <button type="submit" class="btn text-white py-1 m-1" style="background-color: var(--bg);">Salvesta</button>
+            </div>
+        </form>
+    </div>
+</div>
