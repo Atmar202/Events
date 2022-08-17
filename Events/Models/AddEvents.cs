@@ -4,6 +4,7 @@ namespace Events.Models
 {
     public class AddEvents
     {
+        [Key]
         public int Id { get; set; }
         [StringLength(64, MinimumLength = 3)]
         [Required]

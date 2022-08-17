@@ -16,8 +16,7 @@ namespace Events.Data
 
         public DbSet<Events.Models.AddEvents> AddEvents { get; set; } = default!;
 
-        public DbSet<Events.Models.CompanyParticipants>? CompanyParticipants { get; set; }
-
         public DbSet<Events.Models.PrivateParticipants>? PrivateParticipants { get; set; }
+        public DbSet<Events.Models.CompanyParticipants>? CompanyParticipants { get; set; }
     }
 }

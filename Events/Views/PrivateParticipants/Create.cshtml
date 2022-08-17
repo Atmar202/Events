@@ -29,7 +29,10 @@
             </div>
             <div class="form-group">
                 <label asp-for="Maksmisviis" class="control-label"></label>
-                <input asp-for="Maksmisviis" class="form-control" />
+                <select asp-for="Maksmisviis" class="form-select">
+                    <option>Sularaha</option>
+                    <option>Pangaülekanne</option>
+                </select>
                 <span asp-validation-for="Maksmisviis" class="text-danger"></span>
             </div>
             <div class="form-group">

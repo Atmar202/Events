@@ -41,7 +41,54 @@ namespace Events.Controllers
                 return NotFound();
             }
 
-            return View(addEvents);
+            EventsDetailsViewModel viewModel = await GetEventsDetailsViewModel(addEvents);
+
+            return View(viewModel);
+        }
+
+        private async Task<EventsDetailsViewModel> GetEventsDetailsViewModel(AddEvents addEvents)
+        {
+            EventsDetailsViewModel viewModel = new EventsDetailsViewModel();
+
+            viewModel.Events = addEvents;
+
+            List<PrivateParticipants> participants = await _context.PrivateParticipants.Where(m => m.Events == addEvents).ToListAsync();
+
+            viewModel.privateParticipants = participants;
+
+            return viewModel;
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Details([Bind("EventsId, Eesnimi, Perekonnanimi, Isikukood, Maksmisviis, Lisainfo")] EventsDetailsViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                PrivateParticipants privateParticipants = new PrivateParticipants();
+
+                privateParticipants.Eesnimi = viewModel.Eesnimi;
+                privateParticipants.Perekonnanimi = viewModel.Perekonnanimi;
+                privateParticipants.Isikukood = viewModel.Isikukood;
+                privateParticipants.Maksmisviis = viewModel.Maksmisviis;
+                privateParticipants.Lisainfo = viewModel.Lisainfo;
+
+                var addEvents = await _context.AddEvents
+                .FirstOrDefaultAsync(m => m.Id == viewModel.EventsId);
+
+                if (addEvents == null)
+                {
+                    return NotFound();
+                }
+
+                privateParticipants.Events = addEvents;
+                _context.PrivateParticipants.Add(privateParticipants);
+                await _context.SaveChangesAsync();
+
+                viewModel = await GetEventsDetailsViewModel(addEvents);
+            }
+
+            return View(viewModel);
         }
 
         // GET: Admin

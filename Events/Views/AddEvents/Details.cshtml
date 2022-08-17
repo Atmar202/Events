@@ -1,4 +1,4 @@
-﻿@model Events.Models.AddEvents
+﻿@model Events.Models.EventsDetailsViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -11,32 +11,118 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nimi)
+            @Html.DisplayNameFor(model => model.Events.Nimi)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nimi)
+            @Html.DisplayFor(model => model.Events.Nimi)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Toimumisaeg)
+            @Html.DisplayNameFor(model => model.Events.Toimumisaeg)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Toimumisaeg)
+            @Html.DisplayFor(model => model.Events.Toimumisaeg)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Koht)
+            @Html.DisplayNameFor(model => model.Events.Koht)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Koht)
+            @Html.DisplayFor(model => model.Events.Koht)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.lisainfo)
+            @Html.DisplayNameFor(model => model.Events.lisainfo)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.lisainfo)
+            @Html.DisplayFor(model => model.Events.lisainfo)
         </dd>
     </dl>
 </div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Eesnimi
+            </th>
+            <th>
+                Perekonnanimi
+            </th>
+            <th>
+                Isikukood
+            </th>
+            <th>
+                Maksmisviis
+            </th>
+            <th>
+                Lisainfo
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.privateParticipants)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Eesnimi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Perekonnanimi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Isikukood)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Maksmisviis)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lisainfo)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h4>Add New Private Participants</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Details">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="EventsId" value="@Model.Events.Id" />
+            <div class="form-group">
+                <label asp-for="Eesnimi" class="control-label"></label>
+                <input asp-for="Eesnimi" class="form-control" />
+                <span asp-validation-for="Eesnimi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Perekonnanimi" class="control-label"></label>
+                <input asp-for="Perekonnanimi" class="form-control" />
+                <span asp-validation-for="Perekonnanimi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Isikukood" class="control-label"></label>
+                <input asp-for="Isikukood" class="form-control" />
+                <span asp-validation-for="Isikukood" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Maksmisviis" class="control-label"></label>
+                <input asp-for="Maksmisviis" class="form-control" />
+                <span asp-validation-for="Maksmisviis" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Lisainfo" class="control-label"></label>
+                <input asp-for="Lisainfo" class="form-control" />
+                <span asp-validation-for="Lisainfo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.Events?.Id">Edit</a> |
     <a asp-action="Admin">Back to List</a>
 </div>
