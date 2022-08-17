@@ -1,0 +1,37 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Events.Models
+{
+    public class PrivateParticipants
+    {
+        public int Id { get; set; }
+        [StringLength(64, MinimumLength = 3)]
+        [Required]
+        public string Eesnimi { get; set; }
+        [StringLength(64, MinimumLength = 3)]
+        [Required]
+        public string Perekonnanimi { get; set; }
+        [Required]
+        public int Isikukood { get; set; }
+        [Required]
+        public string Maksmisviis { get; set; }
+        [StringLength(1500)]
+        public string Lisainfo { get; set; }
+    }
+
+    public class CompanyParticipants
+    {
+        public int Id { get; set; }
+        [StringLength(64, MinimumLength = 3)]
+        [Required]
+        public string Nimi { get; set; }
+        [Required]
+        public int Registrikood { get; set; }
+        [Required]
+        public int Osavõtjate_arv { get; set; }
+        [Required]
+        public string Maksmiseviis { get; set; }
+        [StringLength(5000)]
+        public string Lisainfo { get; set; }
+    }
+}

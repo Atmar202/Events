@@ -12,6 +12,7 @@ namespace Events.Controllers
         {
             _context = context;
         }
+
         /*
         public IActionResult Index()
         {
