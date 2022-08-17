@@ -5,7 +5,7 @@ switch (page[1].toLowerCase()) {
     case 'home':
         document.getElementById("home").className = document.getElementById("home").className + " active";
     break;
-    case 'events':
+    case 'addevents':
         document.getElementById("events").className = document.getElementById("events").className + " active";
     break;
 }

@@ -1,5 +1,7 @@
-﻿using Events.Models;
+﻿using Events.Data;
+using Events.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace Events.Controllers
@@ -8,14 +10,19 @@ namespace Events.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly EventsContext _context;
+
+        public HomeController(EventsContext context, ILogger<HomeController> logger)
         {
+            _context = context;
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+                return _context.AddEvents != null ?
+                              View(await _context.AddEvents.ToListAsync()) :
+                              Problem("Entity set 'EventsContext.AddEvents'  is null.");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

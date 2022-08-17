@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<Events.Models.AddEvents>
+
+@{
     ViewData["Title"] = "Avaleht";
 }
 
@@ -19,42 +21,50 @@
 <div class="row g-0 py-4">
     <div class="col me-3 bg-white">
         <h4 class="bg py-3 text-center text-white">Tulevased üritused</h4>
-        <div class="row g-0 pt-3">
-            <!-- ANDMED SQL'ist -->
-            <div class="col-6 p-1">
+        @foreach (var item in Model.OrderBy(item => item.Toimumisaeg))
+        {
+            @if (item.Toimumisaeg > DateTime.Now)
+            {
+                <div class="row g-0 pt-3">
+                    <div class="col p-1">
                 <ol>
-                    <li>Nunc inbortis metus eu massa viverra ultri iplacerat nibh</li>
+                        <li>@Html.DisplayFor(modelItem => item.Nimi)</li>
                 </ol>
             </div>
             <div class="col p-1">
-                14.02.2016
+                 @item.Toimumisaeg.ToString("dd.MM.yyyy")
             </div>
             <div class="col p-1 opacity-50">
                 <a class="text-decoration-none text-uppercase text-dark fw-bold" asp-area="" asp-controller="Participants" asp-action="Index">Osavõtjad</a>
                 <a class="ps-2" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/img/remove.svg" width="32" height="22" /></a>
             </div>
-            <!-- ANDMETE LÕPP -->
-            <div class="p-3">
-                <a class="text-uppercase text-dark fw-bold opacity-50 text-decoration-none" asp-area="" asp-controller="Events" asp-action="Index">Lisa üritus</a>
-            </div>
+        </div>
+            }
+        }
+        <div class="p-3">
+            <a class="text-uppercase text-dark fw-bold opacity-50 text-decoration-none" asp-area="" asp-controller="AddEvents" asp-action="Index">Lisa üritus</a>
         </div>
     </div>
     <div class="col ms-3 bg-white">
         <h4 class="bg py-3 text-center text-white">Toimunud üritused</h4>
+        @foreach (var item in Model.OrderByDescending(item => item.Toimumisaeg))
+        {
+            @if (DateTime.Now > item.Toimumisaeg)
+            {
         <div class="row g-0 pt-3">
-            <!-- ANDMED SQL'ist -->
-            <div class="col-6 p-1">
+            <div class="col p-1">
                 <ol>
-                    <li>Aenari commodo</li>
+                 <li>@Html.DisplayFor(modelItem => item.Nimi)</li>
                 </ol>
             </div>
             <div class="col p-1">
-                14.01.2016
+                 @item.Toimumisaeg.ToString("dd.MM.yyyy")
             </div>
             <div class="col p-1 opacity-50">
                 <a class="text-decoration-none text-uppercase text-dark fw-bold" asp-area="" asp-controller="Participants" asp-action="Index">Osavõtjad</a>
             </div>
-            <!-- ANDMETE LÕPP -->
         </div>
+            }
+        }
     </div>
 </div>
