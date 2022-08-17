@@ -27,23 +27,28 @@
             {
                 <div class="row g-0 pt-3">
                     <div class="col p-1">
-                <ol>
-                        <li>@Html.DisplayFor(modelItem => item.Nimi)</li>
-                </ol>
+                        <ol>
+                            <li>@Html.DisplayFor(modelItem => item.Nimi)</li>
+                        </ol>
             </div>
             <div class="col p-1">
                  @item.Toimumisaeg.ToString("dd.MM.yyyy")
             </div>
-            <div class="col p-1 opacity-50">
-                <a class="text-decoration-none text-uppercase text-dark fw-bold" asp-area="" asp-controller="Participants" asp-action="Index">Osavõtjad</a>
-                <a class="ps-2" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/img/remove.svg" width="32" height="22" /></a>
+              <form class="col p-1 opacity-50" asp-route-id="@item.Id" asp-action="Delete" method="post">
+                    <a asp-action="Details" asp-controller="Participants" asp-route-id="@item.Id" class="text-decoration-none text-uppercase text-dark fw-bold">Osavõtjad</a>
+                   <input type="image" src="../Img/remove.svg" width="32" height="22" asp-for="@item.Id" class="ps-2" />
+              </form>
             </div>
-        </div>
+            }
+
+            <!-- STYLE HIDDEN DIVS? Should display on the bottom, fix later -->
+            @if(item == Model.Last()) {
+                <div class="p-3">
+                    <a class="text-uppercase text-dark fw-bold opacity-50 text-decoration-none" asp-area="" asp-controller="AddEvents" asp-action="Index">Lisa üritus</a>
+                </div>
             }
         }
-        <div class="p-3">
-            <a class="text-uppercase text-dark fw-bold opacity-50 text-decoration-none" asp-area="" asp-controller="AddEvents" asp-action="Index">Lisa üritus</a>
-        </div>
+       
     </div>
     <div class="col ms-3 bg-white">
         <h4 class="bg py-3 text-center text-white">Toimunud üritused</h4>
@@ -61,7 +66,7 @@
                  @item.Toimumisaeg.ToString("dd.MM.yyyy")
             </div>
             <div class="col p-1 opacity-50">
-                <a class="text-decoration-none text-uppercase text-dark fw-bold" asp-area="" asp-controller="Participants" asp-action="Index">Osavõtjad</a>
+                <a class="text-decoration-none text-uppercase text-dark fw-bold" asp-action="Details" asp-controller="Participants" asp-route-id="@item.Id">Osavõtjad</a>
             </div>
         </div>
             }

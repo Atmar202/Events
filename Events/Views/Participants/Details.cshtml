@@ -1,11 +1,13 @@
-﻿@{
+﻿@model Events.Models.AddEvents
+
+@{
     ViewData["Title"] = "Ürituse osavõtjad";
 }
 
 <!-- HERO HEADER -->
 <div class="row g-0">
     <div class="col col-lg-3 bg p-3 text-white text-center"><h2>Osavõtjad</h2></div>
-    <div class="col" style="background-image: url('../Img/libled.jpg'); background-size: cover;"></div>
+    <div class="col" style="background-image: url('../../Img/libled.jpg'); background-size: cover;"></div>
 </div>
 
 <!-- HERO -->
@@ -15,15 +17,15 @@
         <div class="row p-1 g-0">
             <div class="form-group row p-1">
                 <h4 class="col-lg-4 col-form-label">Ürituse nimi:</h4>
-                <div class="col-sm-8 col-form-label">sql_nimi</div>
+                <div class="col-sm-8 col-form-label">@Html.DisplayFor(model => model.Nimi)</div>
             </div>
             <div class="form-group row p-1">
                 <h4 class="col-lg-4 col-form-label">Toimumisaeg:</h4>
-                <div class="col-sm-8 col-form-label">sql_aeg</div>
+                <div class="col-sm-8 col-form-label">@Model.Toimumisaeg.ToString("dd.MM.yyyy")</div>
             </div>
             <div class="form-group row p-1">
                 <h4 class="col-lg-4 col-form-label">Koht:</h4>
-                <div class="col-sm-8 col-form-label">sql_koht</div>
+                <div class="col-sm-8 col-form-label">@Html.DisplayFor(model => model.Koht)</div>
             </div>
             <div class="form-group row p-1">
                 <h4 class="col-lg-4 col-form-label">Osavõtjad:</h4>

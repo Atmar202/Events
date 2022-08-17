@@ -25,6 +25,24 @@ namespace Events.Controllers
                               Problem("Entity set 'EventsContext.AddEvents'  is null.");
         }
 
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            if (_context.AddEvents == null)
+            {
+                return Problem("Entity set 'EventsContext.AddEvents'  is null.");
+            }
+            var addEvents = await _context.AddEvents.FindAsync(id);
+            if (addEvents != null)
+            {
+                _context.AddEvents.Remove(addEvents);
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

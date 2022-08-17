@@ -20,7 +20,7 @@ namespace Events.Controllers
         }
 
         // GET: AddEvents
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             // Create Page
             return View();
@@ -44,8 +44,8 @@ namespace Events.Controllers
             return View(addEvents);
         }
 
-        // GET: Home
-        public async Task<IActionResult> Create()
+        // GET: Admin
+        public async Task<IActionResult> Admin()
         {
             return _context.AddEvents != null ?
                           View(await _context.AddEvents.ToListAsync()) :
