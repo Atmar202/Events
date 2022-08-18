@@ -5,7 +5,7 @@ namespace Events.Models
         public class PrivateParticipants
         {
             [Key]
-            public int Id { get; set; }
+            public int PrivateId { get; set; }
             [StringLength(64, MinimumLength = 3)]
             [Required]
             public string Eesnimi { get; set; }
@@ -24,7 +24,7 @@ namespace Events.Models
         public class CompanyParticipants
         {
             [Key]
-            public int Id { get; set; }
+            public int CompanyId { get; set; }
             [StringLength(64, MinimumLength = 3)]
             [Required]
             public string Nimi { get; set; }
@@ -36,6 +36,6 @@ namespace Events.Models
             public string Maksmiseviis { get; set; }
             [StringLength(5000)]
             public string Lisainfo { get; set; }
-            public virtual AddEvents MyEvents { get; set; }
-    }
+            public virtual AddEvents Events { get; set; }
+        }
 }

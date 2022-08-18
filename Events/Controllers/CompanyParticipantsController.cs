@@ -36,7 +36,7 @@ namespace Events.Controllers
             }
 
             var companyParticipants = await _context.CompanyParticipants
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.CompanyId == id);
             if (companyParticipants == null)
             {
                 return NotFound();
@@ -56,7 +56,7 @@ namespace Events.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nimi,Registrikood,Osavõtjate_arv,Maksmiseviis,Lisainfo")] CompanyParticipants companyParticipants)
+        public async Task<IActionResult> Create([Bind("CompanyId,Nimi,Registrikood,Osavõtjate_arv,Maksmiseviis,Lisainfo")] CompanyParticipants companyParticipants)
         {
             if (ModelState.IsValid)
             {
@@ -88,9 +88,9 @@ namespace Events.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nimi,Registrikood,Osavõtjate_arv,Maksmiseviis,Lisainfo")] CompanyParticipants companyParticipants)
+        public async Task<IActionResult> Edit(int id, [Bind("CompanyId,Nimi,Registrikood,Osavõtjate_arv,Maksmiseviis,Lisainfo")] CompanyParticipants companyParticipants)
         {
-            if (id != companyParticipants.Id)
+            if (id != companyParticipants.CompanyId)
             {
                 return NotFound();
             }
@@ -104,7 +104,7 @@ namespace Events.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CompanyParticipantsExists(companyParticipants.Id))
+                    if (!CompanyParticipantsExists(companyParticipants.CompanyId))
                     {
                         return NotFound();
                     }
@@ -127,7 +127,7 @@ namespace Events.Controllers
             }
 
             var companyParticipants = await _context.CompanyParticipants
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.CompanyId == id);
             if (companyParticipants == null)
             {
                 return NotFound();
@@ -157,7 +157,7 @@ namespace Events.Controllers
 
         private bool CompanyParticipantsExists(int id)
         {
-          return (_context.CompanyParticipants?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.CompanyParticipants?.Any(e => e.CompanyId == id)).GetValueOrDefault();
         }
     }
 }

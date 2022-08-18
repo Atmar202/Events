@@ -36,7 +36,7 @@ namespace Events.Controllers
             }
 
             var privateParticipants = await _context.PrivateParticipants
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.PrivateId == id);
             if (privateParticipants == null)
             {
                 return NotFound();
@@ -56,7 +56,7 @@ namespace Events.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Eesnimi,Perekonnanimi,Isikukood,Maksmisviis,Lisainfo")] PrivateParticipants privateParticipants)
+        public async Task<IActionResult> Create([Bind("PrivateId,Eesnimi,Perekonnanimi,Isikukood,Maksmisviis,Lisainfo")] PrivateParticipants privateParticipants)
         {
             if (ModelState.IsValid)
             {
@@ -88,9 +88,9 @@ namespace Events.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Eesnimi,Perekonnanimi,Isikukood,Maksmisviis,Lisainfo")] PrivateParticipants privateParticipants)
+        public async Task<IActionResult> Edit(int id, [Bind("PrivateId,Eesnimi,Perekonnanimi,Isikukood,Maksmisviis,Lisainfo")] PrivateParticipants privateParticipants)
         {
-            if (id != privateParticipants.Id)
+            if (id != privateParticipants.PrivateId)
             {
                 return NotFound();
             }
@@ -104,7 +104,7 @@ namespace Events.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PrivateParticipantsExists(privateParticipants.Id))
+                    if (!PrivateParticipantsExists(privateParticipants.PrivateId))
                     {
                         return NotFound();
                     }
@@ -127,7 +127,7 @@ namespace Events.Controllers
             }
 
             var privateParticipants = await _context.PrivateParticipants
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.PrivateId == id);
             if (privateParticipants == null)
             {
                 return NotFound();
@@ -157,7 +157,7 @@ namespace Events.Controllers
 
         private bool PrivateParticipantsExists(int id)
         {
-          return (_context.PrivateParticipants?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.PrivateParticipants?.Any(e => e.PrivateId == id)).GetValueOrDefault();
         }
     }
 }

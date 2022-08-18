@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Events.Migrations
 {
     [DbContext(typeof(EventsContext))]
-    [Migration("20220817153305_Participants")]
-    partial class Participants
+    [Migration("20220817232315_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -57,11 +57,14 @@ namespace Events.Migrations
 
             modelBuilder.Entity("Events.Models.CompanyParticipants", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CompanyId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CompanyId"), 1L, 1);
+
+                    b.Property<int>("EventsId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Lisainfo")
                         .IsRequired()
@@ -83,23 +86,28 @@ namespace Events.Migrations
                     b.Property<int>("Registrikood")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("CompanyId");
+
+                    b.HasIndex("EventsId");
 
                     b.ToTable("CompanyParticipants");
                 });
 
             modelBuilder.Entity("Events.Models.PrivateParticipants", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("PrivateId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PrivateId"), 1L, 1);
 
                     b.Property<string>("Eesnimi")
                         .IsRequired()
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
+
+                    b.Property<int>("EventsId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Isikukood")
                         .HasColumnType("int");
@@ -118,9 +126,33 @@ namespace Events.Migrations
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
 
-                    b.HasKey("Id");
+                    b.HasKey("PrivateId");
+
+                    b.HasIndex("EventsId");
 
                     b.ToTable("PrivateParticipants");
+                });
+
+            modelBuilder.Entity("Events.Models.CompanyParticipants", b =>
+                {
+                    b.HasOne("Events.Models.AddEvents", "Events")
+                        .WithMany()
+                        .HasForeignKey("EventsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Events");
+                });
+
+            modelBuilder.Entity("Events.Models.PrivateParticipants", b =>
+                {
+                    b.HasOne("Events.Models.AddEvents", "Events")
+                        .WithMany()
+                        .HasForeignKey("EventsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Events");
                 });
 #pragma warning restore 612, 618
         }

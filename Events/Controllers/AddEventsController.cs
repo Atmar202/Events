@@ -76,7 +76,7 @@ namespace Events.Controllers
                 var addEvents = await _context.AddEvents
                 .FirstOrDefaultAsync(m => m.Id == viewModel.EventsId);
 
-                if (addEvents == null)
+                if (addEvents == null || _context.PrivateParticipants == null)
                 {
                     return NotFound();
                 }
