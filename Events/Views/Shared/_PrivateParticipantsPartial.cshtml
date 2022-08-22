@@ -1,0 +1,39 @@
+﻿@model Events.Models.EventsDetailsViewModel
+
+<div class="col-md-4">
+    <form action="@Url.Action("CreatePrivateParticipant")" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="EventsId" value="@Model.Events.Id" />
+        <div class="form-group">
+            <label asp-for="privateParticipantsModel.Eesnimi" class="control-label"></label>
+            <input asp-for="privateParticipantsModel.Eesnimi" class="form-control" />
+            <span asp-validation-for="privateParticipantsModel.Eesnimi" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="privateParticipantsModel.Perekonnanimi" class="control-label"></label>
+            <input asp-for="privateParticipantsModel.Perekonnanimi" class="form-control" />
+            <span asp-validation-for="privateParticipantsModel.Perekonnanimi" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="privateParticipantsModel.Isikukood" class="control-label"></label>
+            <input asp-for="privateParticipantsModel.Isikukood" class="form-control" />
+            <span asp-validation-for="privateParticipantsModel.Isikukood" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="privateParticipantsModel.Maksmisviis" class="control-label"></label>
+            <select asp-for="privateParticipantsModel.Maksmisviis" class="form-select">
+                <option>Sularaha</option>
+                <option>Pangaülekanne</option>
+            </select>
+            <span asp-validation-for="privateParticipantsModel.Maksmisviis" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="privateParticipantsModel.Lisainfo" class="control-label"></label>
+            <input asp-for="privateParticipantsModel.Lisainfo" class="form-control" />
+            <span asp-validation-for="privateParticipantsModel.Lisainfo" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
