@@ -15,9 +15,13 @@ function checkRadio() {
     var radio = document.querySelector('#inlineRadio1');
 
     if (radio.checked) {
+        localStorage.setItem("eraisik", "selected");
+        localStorage.removeItem("juriidiline");
         document.getElementById("juriidiline").style.display = "none";
         document.getElementById("eraisik").style.display = "initial";
     } else {
+        localStorage.setItem("juriidiline", "selected");
+        localStorage.removeItem("eraisik");
         document.getElementById("eraisik").style.display = "none";
         document.getElementById("juriidiline").style.display = "initial";
     }

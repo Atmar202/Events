@@ -26,10 +26,12 @@ namespace Events.Models
             public int CompanyId { get; set; }
             [StringLength(64, MinimumLength = 3)]
             [Required]
+            [Display(Name = "Juriidiline nimi")]
             public string Nimi { get; set; }
             [Required]
             public int Registrikood { get; set; }
             [Required]
+            [Display(Name = "Osavõtjate arv")]
             public int Osavõtjate_arv { get; set; }
             [Required]
             public string Maksmiseviis { get; set; }

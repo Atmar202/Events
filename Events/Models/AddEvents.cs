@@ -7,6 +7,7 @@ namespace Events.Models
         public int Id { get; set; }
         [StringLength(64, MinimumLength = 3)]
         [Required]
+        [Display(Name = "Ürituse nimi")]
         public string Nimi { get; set; }
         [Required(ErrorMessage = "Palun sisesta kuupäev, formaat: pp.kk.aaaa hh:mm")]
         [DataType(DataType.DateTime)]
@@ -16,6 +17,6 @@ namespace Events.Models
         [Required]
         public string Koht { get; set; }
         [StringLength(1000)]
-        public string? lisainfo { get; set; }
+        public string? Lisainfo { get; set; }
     }
 }
