@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Events.Migrations
 {
     [DbContext(typeof(EventsContext))]
-    [Migration("20220817232315_Initial")]
+    [Migration("20220822173455_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,7 +46,6 @@ namespace Events.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("lisainfo")
-                        .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
@@ -63,11 +62,10 @@ namespace Events.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CompanyId"), 1L, 1);
 
-                    b.Property<int>("EventsId")
+                    b.Property<int?>("EventsId")
                         .HasColumnType("int");
 
                     b.Property<string>("Lisainfo")
-                        .IsRequired()
                         .HasMaxLength(5000)
                         .HasColumnType("nvarchar(max)");
 
@@ -106,14 +104,13 @@ namespace Events.Migrations
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
 
-                    b.Property<int>("EventsId")
+                    b.Property<int?>("EventsId")
                         .HasColumnType("int");
 
                     b.Property<int>("Isikukood")
                         .HasColumnType("int");
 
                     b.Property<string>("Lisainfo")
-                        .IsRequired()
                         .HasMaxLength(1500)
                         .HasColumnType("nvarchar(1500)");
 
@@ -123,8 +120,7 @@ namespace Events.Migrations
 
                     b.Property<string>("Perekonnanimi")
                         .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("nvarchar(64)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PrivateId");
 
@@ -137,9 +133,7 @@ namespace Events.Migrations
                 {
                     b.HasOne("Events.Models.AddEvents", "Events")
                         .WithMany()
-                        .HasForeignKey("EventsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EventsId");
 
                     b.Navigation("Events");
                 });
@@ -148,9 +142,7 @@ namespace Events.Migrations
                 {
                     b.HasOne("Events.Models.AddEvents", "Events")
                         .WithMany()
-                        .HasForeignKey("EventsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EventsId");
 
                     b.Navigation("Events");
                 });

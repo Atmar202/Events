@@ -16,6 +16,6 @@ namespace Events.Models
         [Required]
         public string Koht { get; set; }
         [StringLength(1000)]
-        public string lisainfo { get; set; }
+        public string? lisainfo { get; set; }
     }
 }

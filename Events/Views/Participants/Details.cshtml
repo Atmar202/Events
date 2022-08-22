@@ -1,4 +1,4 @@
-﻿@model Events.Models.AddEvents
+﻿@model Events.Models.EventsDetailsViewModel
 
 @{
     ViewData["Title"] = "Ürituse osavõtjad";
@@ -17,15 +17,15 @@
         <div class="row p-1 g-0">
             <div class="form-group row p-1">
                 <h4 class="col-lg-4 col-form-label">Ürituse nimi:</h4>
-                <div class="col-sm-8 col-form-label">@Html.DisplayFor(model => model.Nimi)</div>
+                <div class="col-sm-8 col-form-label">@Html.DisplayFor(model => model.Events.Nimi)</div>
             </div>
             <div class="form-group row p-1">
                 <h4 class="col-lg-4 col-form-label">Toimumisaeg:</h4>
-                <div class="col-sm-8 col-form-label">@Model.Toimumisaeg.ToString("dd.MM.yyyy")</div>
+                <div class="col-sm-8 col-form-label">@Model.Events.Toimumisaeg.ToString("dd.MM.yyyy")</div>
             </div>
             <div class="form-group row p-1">
                 <h4 class="col-lg-4 col-form-label">Koht:</h4>
-                <div class="col-sm-8 col-form-label">@Html.DisplayFor(model => model.Koht)</div>
+                <div class="col-sm-8 col-form-label">@Html.DisplayFor(model => model.Events.Koht)</div>
             </div>
             <div class="form-group row p-1">
                 <h4 class="col-lg-4 col-form-label">Osavõtjad:</h4>
@@ -33,18 +33,17 @@
         </div>
     </div>
 
-    <!-- ANDMED SQL'ist
-    foreach (var item in Model.Item2)
-    {-->
+    @foreach (var item in Model.privateParticipants)
+    {
     <small>
         <div class="row g-0 p-1 col-sm-8 ms-auto">
             <div class="col py-1 px-3">
                 <ol>
-                    <li>Aenari commodo</li>
+                        <li>@Html.DisplayFor(modelItem => item.Eesnimi)</li>
                 </ol>
             </div>
             <div class="col py-1 px-3">
-                3715892015194
+                    @Html.DisplayFor(modelItem => item.Isikukood)
             </div>
             <div class="col py-1 opacity-50 px-3">
                 <a class="px-3 text-decoration-none text-uppercase text-dark fw-bold" asp-area="" asp-controller="Participants" asp-action="Info">Vaata</a>
@@ -52,6 +51,7 @@
             </div>
         </div>
     </small>
+    }
 
     <div class="col-xl-5 mx-auto p-4">
         <h4 style="color: var(--bg);">Osavõtjate lisamine</h4>

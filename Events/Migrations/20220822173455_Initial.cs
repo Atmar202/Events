@@ -18,7 +18,7 @@ namespace Events.Migrations
                     Nimi = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
                     Toimumisaeg = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Koht = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
-                    lisainfo = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false)
+                    lisainfo = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -35,8 +35,8 @@ namespace Events.Migrations
                     Registrikood = table.Column<int>(type: "int", nullable: false),
                     Osavõtjate_arv = table.Column<int>(type: "int", nullable: false),
                     Maksmiseviis = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Lisainfo = table.Column<string>(type: "nvarchar(max)", maxLength: 5000, nullable: false),
-                    EventsId = table.Column<int>(type: "int", nullable: false)
+                    Lisainfo = table.Column<string>(type: "nvarchar(max)", maxLength: 5000, nullable: true),
+                    EventsId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -45,8 +45,7 @@ namespace Events.Migrations
                         name: "FK_CompanyParticipants_AddEvents_EventsId",
                         column: x => x.EventsId,
                         principalTable: "AddEvents",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -56,11 +55,11 @@ namespace Events.Migrations
                     PrivateId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Eesnimi = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
-                    Perekonnanimi = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
+                    Perekonnanimi = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Isikukood = table.Column<int>(type: "int", nullable: false),
                     Maksmisviis = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Lisainfo = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: false),
-                    EventsId = table.Column<int>(type: "int", nullable: false)
+                    Lisainfo = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: true),
+                    EventsId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -69,8 +68,7 @@ namespace Events.Migrations
                         name: "FK_PrivateParticipants_AddEvents_EventsId",
                         column: x => x.EventsId,
                         principalTable: "AddEvents",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(

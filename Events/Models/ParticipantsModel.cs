@@ -9,7 +9,6 @@ namespace Events.Models
             [StringLength(64, MinimumLength = 3)]
             [Required]
             public string Eesnimi { get; set; }
-            [StringLength(64, MinimumLength = 3)]
             [Required]
             public string Perekonnanimi { get; set; }
             [Required]
@@ -17,8 +16,8 @@ namespace Events.Models
             [Required]
             public string Maksmisviis { get; set; }
             [StringLength(1500)]
-            public string Lisainfo { get; set; }
-            public virtual AddEvents Events { get; set; }
+            public string? Lisainfo { get; set; }
+            public virtual AddEvents? Events { get; set; }
         }
 
         public class CompanyParticipants
@@ -35,7 +34,7 @@ namespace Events.Models
             [Required]
             public string Maksmiseviis { get; set; }
             [StringLength(5000)]
-            public string Lisainfo { get; set; }
-            public virtual AddEvents Events { get; set; }
+            public string? Lisainfo { get; set; }
+            public virtual AddEvents? Events { get; set; }
         }
 }

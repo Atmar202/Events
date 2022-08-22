@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Events.Data;
 using Events.Models;
@@ -34,8 +33,8 @@ namespace Events.Controllers
                 return NotFound();
             }
 
-            var addEvents = await _context.AddEvents
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var addEvents = await _context.AddEvents.FirstOrDefaultAsync(m => m.Id == id);
+            
             if (addEvents == null)
             {
                 return NotFound();
@@ -46,49 +45,84 @@ namespace Events.Controllers
             return View(viewModel);
         }
 
+        public async Task<IActionResult> CreatePrivateParticipant([Bind("Eesnimi, Perekonnanimi, Isikukood, Maksmisviis, Lisainfo, EventsId")] IFormCollection values, EventsDetailsViewModel viewModel)
+        {
+            var addEvents = await _context.AddEvents
+                .FirstOrDefaultAsync(m => m.Id == viewModel.EventsId);
+
+            if (addEvents == null || _context.PrivateParticipants == null)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                PrivateParticipants privateParticipants = new PrivateParticipants();
+
+                privateParticipants.Eesnimi = viewModel.privateParticipantsModel.Eesnimi;
+                privateParticipants.Perekonnanimi = viewModel.privateParticipantsModel.Perekonnanimi;
+                privateParticipants.Isikukood = viewModel.privateParticipantsModel.Isikukood;
+                privateParticipants.Maksmisviis = viewModel.privateParticipantsModel.Maksmisviis;
+                privateParticipants.Lisainfo = viewModel.privateParticipantsModel.Lisainfo;
+
+                privateParticipants.Events = addEvents;
+                _context.PrivateParticipants.Add(privateParticipants);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            viewModel = await GetEventsDetailsViewModel(addEvents);
+
+            return View("Details", viewModel);
+        }
+        public async Task<IActionResult> CreateCompanyParticipant([Bind("Nimi, Registrikood, Osavõtjate_arv, Maksmiseviis, Lisainfo, EventsId")] IFormCollection values, EventsDetailsViewModel viewModel)
+        {
+            var addEvents = await _context.AddEvents
+                .FirstOrDefaultAsync(m => m.Id == viewModel.EventsId);
+
+            if (addEvents == null || _context.CompanyParticipants == null)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                CompanyParticipants companyParticipants = new CompanyParticipants();
+
+                companyParticipants.Nimi = viewModel.companyParticipantsModel.Nimi;
+                companyParticipants.Registrikood = viewModel.companyParticipantsModel.Registrikood;
+                companyParticipants.Osavõtjate_arv = viewModel.companyParticipantsModel.Osavõtjate_arv;
+                companyParticipants.Maksmiseviis = viewModel.companyParticipantsModel.Maksmiseviis;
+                companyParticipants.Lisainfo = viewModel.companyParticipantsModel.Lisainfo;
+
+                companyParticipants.Events = addEvents;
+                _context.CompanyParticipants.Add(companyParticipants);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            viewModel = await GetEventsDetailsViewModel(addEvents);
+
+            return View("Details", viewModel);
+        }
+
         private async Task<EventsDetailsViewModel> GetEventsDetailsViewModel(AddEvents addEvents)
         {
             EventsDetailsViewModel viewModel = new EventsDetailsViewModel();
 
             viewModel.Events = addEvents;
 
-            List<PrivateParticipants> participants = await _context.PrivateParticipants.Where(m => m.Events == addEvents).ToListAsync();
+            IEnumerable<PrivateParticipants> private_participants = await _context.PrivateParticipants.Where(m => m.Events == addEvents).ToListAsync();
 
-            viewModel.privateParticipants = participants;
+            viewModel.privateParticipants = private_participants;
+
+            IEnumerable<CompanyParticipants> company_participants = await _context.CompanyParticipants.Where(m => m.Events == addEvents).ToListAsync();
+
+            viewModel.companyParticipants = company_participants;
 
             return viewModel;
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Details([Bind("EventsId, Eesnimi, Perekonnanimi, Isikukood, Maksmisviis, Lisainfo")] EventsDetailsViewModel viewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                PrivateParticipants privateParticipants = new PrivateParticipants();
-
-                privateParticipants.Eesnimi = viewModel.Eesnimi;
-                privateParticipants.Perekonnanimi = viewModel.Perekonnanimi;
-                privateParticipants.Isikukood = viewModel.Isikukood;
-                privateParticipants.Maksmisviis = viewModel.Maksmisviis;
-                privateParticipants.Lisainfo = viewModel.Lisainfo;
-
-                var addEvents = await _context.AddEvents
-                .FirstOrDefaultAsync(m => m.Id == viewModel.EventsId);
-
-                if (addEvents == null || _context.PrivateParticipants == null)
-                {
-                    return NotFound();
-                }
-
-                privateParticipants.Events = addEvents;
-                _context.PrivateParticipants.Add(privateParticipants);
-                await _context.SaveChangesAsync();
-
-                viewModel = await GetEventsDetailsViewModel(addEvents);
-            }
-
-            return View(viewModel);
         }
 
         // GET: Admin
