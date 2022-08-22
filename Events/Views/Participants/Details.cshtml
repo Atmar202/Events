@@ -30,41 +30,41 @@
         </div>
     </div>
 
-    @foreach (var item in Model.privateParticipants)
+    @for (var i = 0; i < Model.privateParticipants.Count(); i++)
     {
     <small>
         <div class="row g-0 p-1 col-sm-8 ms-auto">
             <div class="col py-1 px-3">
-                <ol>
-                    <li>@Html.DisplayFor(modelItem => item.Eesnimi)</li>
-                </ol>
+                @i. @Html.DisplayFor(modelItem => modelItem.privateParticipants[i].Eesnimi)
             </div>
             <div class="col py-1 px-3">
-                    @Html.DisplayFor(modelItem => item.Isikukood)
+                    @Html.DisplayFor(modelItem => modelItem.privateParticipants[i].Isikukood)
             </div>
             <div class="col py-1 opacity-50 px-3">
-                <a class="px-3 text-decoration-none text-uppercase text-dark fw-bold" asp-area="" asp-controller="Participants" asp-action="Info">Vaata</a>
-                <a href="#" class="px-3 text-decoration-none text-uppercase text-dark fw-bold">Kustuta</a>
+                <form asp-route-id="@Model.privateParticipants[i].PrivateId" asp-action="DeletePrivateParticipant" method="post">
+                        <a class="px-3 text-decoration-none text-uppercase text-dark fw-bold" asp-route-id="@Model.privateParticipants[i].PrivateId" asp-action="PrivateParticipant">Vaata</a>
+                   <a href="javascript:{}" onclick="this.closest('form').submit(); return false;" class="px-3 text-decoration-none text-uppercase text-dark fw-bold">Kustuta</a>
+                </form>
             </div>
         </div>
     </small>
     }
 
-    @foreach (var item in Model.companyParticipants)
+    @for (var i = 0; i < Model.companyParticipants.Count(); i++)
     {
         <small>
             <div class="row g-0 p-1 col-sm-8 ms-auto">
                 <div class="col py-1 px-3">
-                    <ol>
-                        <li>@Html.DisplayFor(modelItem => item.Nimi)</li>
-                    </ol>
+                    @i. @Html.DisplayFor(modelItem => modelItem.companyParticipants[i].Nimi)
                 </div>
                 <div class="col py-1 px-3">
-                    @Html.DisplayFor(modelItem => item.Registrikood)
+                    @Html.DisplayFor(modelItem => modelItem.companyParticipants[i].Registrikood)
                 </div>
                 <div class="col py-1 opacity-50 px-3">
-                    <a class="px-3 text-decoration-none text-uppercase text-dark fw-bold" asp-area="" asp-controller="Participants" asp-action="Info">Vaata</a>
-                    <a href="#" class="px-3 text-decoration-none text-uppercase text-dark fw-bold">Kustuta</a>
+                    <form asp-route-id="@Model.companyParticipants[i].CompanyId" asp-action="DeleteCompanyParticipant" method="post">
+                        <a class="px-3 text-decoration-none text-uppercase text-dark fw-bold" asp-route-id="@Model.companyParticipants[i].CompanyId" asp-action="CompanyParticipant">Vaata</a>
+                        <a href="javascript:{}" onclick="this.closest('form').submit(); return false;" class="px-3 text-decoration-none text-uppercase text-dark fw-bold">Kustuta</a>
+                    </form>
                 </div>
             </div>
         </small>

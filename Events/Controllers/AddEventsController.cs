@@ -114,11 +114,11 @@ namespace Events.Controllers
 
             viewModel.Events = addEvents;
 
-            IEnumerable<PrivateParticipants> private_participants = await _context.PrivateParticipants.Where(m => m.Events == addEvents).ToListAsync();
+            List<PrivateParticipants> private_participants = await _context.PrivateParticipants.Where(m => m.Events == addEvents).ToListAsync();
 
             viewModel.privateParticipants = private_participants;
 
-            IEnumerable<CompanyParticipants> company_participants = await _context.CompanyParticipants.Where(m => m.Events == addEvents).ToListAsync();
+            List<CompanyParticipants> company_participants = await _context.CompanyParticipants.Where(m => m.Events == addEvents).ToListAsync();
 
             viewModel.companyParticipants = company_participants;
 

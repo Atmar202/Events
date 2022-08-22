@@ -14,16 +14,72 @@ namespace Events.Controllers
             _context = context;
         }
 
-        /*
-        public IActionResult Index()
+        public async Task<IActionResult> PrivateParticipant(int? id)
         {
-            return View();
-        }*/
+            if (id == null || _context.PrivateParticipants == null)
+            {
+                return NotFound();
+            }
 
-        public IActionResult Info()
-        {
-            return View();
+            var privateParticipants = await _context.PrivateParticipants.FindAsync(id);
+
+            if (privateParticipants == null)
+            {
+                return NotFound();
+            }
+
+            return View(privateParticipants);
         }
+
+        public async Task<IActionResult> CompanyParticipant(int? id)
+        {
+            if (id == null || _context.CompanyParticipants == null)
+            {
+                return NotFound();
+            }
+
+            var companyParticipants = await _context.CompanyParticipants.FindAsync(id);
+
+            if (companyParticipants == null)
+            {
+                return NotFound();
+            }
+
+            return View(companyParticipants);
+        }
+
+        /*
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> PrivateParticipant(int id, [Bind("PrivateId,Eesnimi,Perekonnanimi,Isikukood,Maksmisviis,Lisainfo")] PrivateParticipants privateParticipants)
+        {
+            if (id != privateParticipants.PrivateId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(privateParticipants);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!PrivateParticipantsExists(privateParticipants.PrivateId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(privateParticipants);
+        }*/
 
         public async Task<IActionResult> Details(int? id)
         {
@@ -50,11 +106,11 @@ namespace Events.Controllers
 
             viewModel.Events = addEvents;
 
-            IEnumerable<PrivateParticipants> private_participants = await _context.PrivateParticipants.Where(m => m.Events == addEvents).ToListAsync();
+            List<PrivateParticipants> private_participants = await _context.PrivateParticipants.Where(m => m.Events == addEvents).ToListAsync();
 
             viewModel.privateParticipants = private_participants;
 
-            IEnumerable<CompanyParticipants> company_participants = await _context.CompanyParticipants.Where(m => m.Events == addEvents).ToListAsync();
+            List<CompanyParticipants> company_participants = await _context.CompanyParticipants.Where(m => m.Events == addEvents).ToListAsync();
 
             viewModel.companyParticipants = company_participants;
 
@@ -123,6 +179,42 @@ namespace Events.Controllers
             viewModel = await GetEventsDetailsViewModel(addEvents);
 
             return View("Details", viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeletePrivateParticipant(int id)
+        {
+            if (_context.PrivateParticipants == null)
+            {
+                return Problem("Entity set 'EventsContext.PrivateParticipants'  is null.");
+            }
+            var privateParticipants = await _context.PrivateParticipants.FindAsync(id);
+            if (privateParticipants != null)
+            {
+                _context.PrivateParticipants.Remove(privateParticipants);
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteCompanyParticipant(int id)
+        {
+            if (_context.CompanyParticipants == null)
+            {
+                return Problem("Entity set 'EventsContext.CompanyParticipants'  is null.");
+            }
+            var companyParticipants = await _context.CompanyParticipants.FindAsync(id);
+            if (companyParticipants != null)
+            {
+                _context.CompanyParticipants.Remove(companyParticipants);
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
     }
