@@ -41,8 +41,8 @@
                     @Html.DisplayFor(modelItem => modelItem.privateParticipants[i].Isikukood)
             </div>
             <div class="col py-1 opacity-50 px-3">
-                <form asp-route-id="@Model.privateParticipants[i].PrivateId" asp-action="DeletePrivateParticipant" method="post">
-                        <a class="px-3 text-decoration-none text-uppercase text-dark fw-bold" asp-route-id="@Model.privateParticipants[i].PrivateId" asp-action="PrivateParticipant">Vaata</a>
+                    <form asp-route-id="@Model.privateParticipants[i].PrivateId" asp-route-eventsId="@Model.privateParticipants[i].Events.Id" asp-action="DeletePrivateParticipant" method="post">
+                        <a class="px-3 text-decoration-none text-uppercase text-dark fw-bold" asp-route-id="@Model.privateParticipants[i].PrivateId" asp-route-eventsId="@Model.privateParticipants[i].Events.Id" asp-action="PrivateParticipant">Vaata</a>
                    <a href="javascript:{}" onclick="this.closest('form').submit(); return false;" class="px-3 text-decoration-none text-uppercase text-dark fw-bold">Kustuta</a>
                 </form>
             </div>
@@ -61,8 +61,8 @@
                     @Html.DisplayFor(modelItem => modelItem.companyParticipants[i].Registrikood)
                 </div>
                 <div class="col py-1 opacity-50 px-3">
-                    <form asp-route-id="@Model.companyParticipants[i].CompanyId" asp-action="DeleteCompanyParticipant" method="post">
-                        <a class="px-3 text-decoration-none text-uppercase text-dark fw-bold" asp-route-id="@Model.companyParticipants[i].CompanyId" asp-action="CompanyParticipant">Vaata</a>
+                    <form asp-route-id="@Model.companyParticipants[i].CompanyId" asp-route-eventsId="@Model.companyParticipants[i].Events.Id" asp-action="DeleteCompanyParticipant" method="post">
+                        <a class="px-3 text-decoration-none text-uppercase text-dark fw-bold" asp-route-id="@Model.companyParticipants[i].CompanyId" asp-route-eventsId="@Model.companyParticipants[i].Events.Id" asp-action="CompanyParticipant">Vaata</a>
                         <a href="javascript:{}" onclick="this.closest('form').submit(); return false;" class="px-3 text-decoration-none text-uppercase text-dark fw-bold">Kustuta</a>
                     </form>
                 </div>

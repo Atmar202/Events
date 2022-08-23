@@ -3,6 +3,7 @@ using Events.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Events.Controllers
 {
@@ -15,14 +16,15 @@ namespace Events.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> PrivateParticipant(int? id)
+        [Route("{controller}/{eventsId}/{action}/{id}/")]
+        public async Task<IActionResult> PrivateParticipant(int? id, int? eventsId)
         {
             if (id == null || _context.PrivateParticipants == null)
             {
                 return NotFound();
             }
 
-            var addEvents = await _context.AddEvents.FirstOrDefaultAsync(m => m.Id == id);
+            var addEvents = await _context.AddEvents.FirstOrDefaultAsync(m => m.Id == eventsId);
 
             var privateParticipants = await _context.PrivateParticipants.FindAsync(id);
 
@@ -38,7 +40,41 @@ namespace Events.Controllers
             return View(viewModel);
         }
 
-            public async Task<IActionResult> CompanyParticipant(int? id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("{controller}/{eventsId}/{action}/{id}/")]
+        public async Task<IActionResult> PrivateParticipant([Bind("PrivateId, Eesnimi, Perekonnanimi, Isikukood, Maksmisviis, Lisainfo, EventsId")] int id, int eventsId, EventsDetailsViewModel viewModel)
+        {
+            var addEvents = await _context.AddEvents.FirstOrDefaultAsync(m => m.Id == eventsId);
+
+            var privateParticipants = await _context.PrivateParticipants.FirstOrDefaultAsync(x => x.PrivateId == id);
+
+            if (privateParticipants == null)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                privateParticipants.Eesnimi = viewModel.privateParticipantsModel.Eesnimi;
+                privateParticipants.Perekonnanimi = viewModel.privateParticipantsModel.Perekonnanimi;
+                privateParticipants.Isikukood = viewModel.privateParticipantsModel.Isikukood;
+                privateParticipants.Maksmisviis = viewModel.privateParticipantsModel.Maksmisviis;
+                privateParticipants.Lisainfo = viewModel.privateParticipantsModel.Lisainfo;
+
+                _context.Update(privateParticipants);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Details", new { id = eventsId });
+            }
+
+            viewModel = await GetEventsDetailsViewModel(addEvents);
+
+            return View("PrivateParticipant", viewModel);
+        }
+
+        [Route("{controller}/{eventsId}/{action}/{id}/")]
+        public async Task<IActionResult> CompanyParticipant(int? id, int? eventsId)
         {
 
             if (id == null || _context.CompanyParticipants == null)
@@ -46,7 +82,7 @@ namespace Events.Controllers
                 return NotFound();
             }
 
-            var addEvents = await _context.AddEvents.FirstOrDefaultAsync(m => m.Id == id);
+            var addEvents = await _context.AddEvents.FirstOrDefaultAsync(m => m.Id == eventsId);
 
             var companyParticipants = await _context.CompanyParticipants.FindAsync(id);
 
@@ -62,38 +98,38 @@ namespace Events.Controllers
             return View(viewModel);
         }
 
-        /*
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> PrivateParticipant(int id, [Bind("PrivateId,Eesnimi,Perekonnanimi,Isikukood,Maksmisviis,Lisainfo")] PrivateParticipants privateParticipants)
+        [Route("{controller}/{eventsId}/{action}/{id}/")]
+        public async Task<IActionResult> CompanyParticipant([Bind("CompanyId, Nimi, Registrikood, Osavõtjate_arv, Maksmiseviis, Lisainfo, EventsId")] int id, int eventsId, EventsDetailsViewModel viewModel)
         {
-            if (id != privateParticipants.PrivateId)
+            var addEvents = await _context.AddEvents.FirstOrDefaultAsync(m => m.Id == eventsId);
+
+            var companyParticipants = await _context.CompanyParticipants.FirstOrDefaultAsync(x => x.CompanyId == id);
+
+            if (companyParticipants == null)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(privateParticipants);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!PrivateParticipantsExists(privateParticipants.PrivateId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                companyParticipants.Nimi = viewModel.companyParticipantsModel.Nimi;
+                companyParticipants.Registrikood = viewModel.companyParticipantsModel.Registrikood;
+                companyParticipants.Osavõtjate_arv = viewModel.companyParticipantsModel.Osavõtjate_arv;
+                companyParticipants.Maksmiseviis = viewModel.companyParticipantsModel.Maksmiseviis;
+                companyParticipants.Lisainfo = viewModel.companyParticipantsModel.Lisainfo;
+
+                _context.Update(companyParticipants);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Details", new { id = eventsId });
             }
-            return View(privateParticipants);
-        }*/
+
+            viewModel = await GetEventsDetailsViewModel(addEvents);
+
+            return View("PrivateParticipant", viewModel);
+        }
 
         public async Task<IActionResult> Details(int? id)
         {
@@ -197,7 +233,7 @@ namespace Events.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeletePrivateParticipant(int id)
+        public async Task<IActionResult> DeletePrivateParticipant(int id, int eventsId)
         {
             if (_context.PrivateParticipants == null)
             {
@@ -210,12 +246,12 @@ namespace Events.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Details), new { id = eventsId });
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteCompanyParticipant(int id)
+        public async Task<IActionResult> DeleteCompanyParticipant(int id, int eventsId)
         {
             if (_context.CompanyParticipants == null)
             {
@@ -228,8 +264,7 @@ namespace Events.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Details), new { id = eventsId });
         }
-
     }
 }

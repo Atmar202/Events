@@ -1,7 +1,7 @@
 ﻿@model Events.Models.EventsDetailsViewModel
 
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="EventsId" value="@Model.Events?.Id" />
+        <input type="hidden" asp-for="EventsId" value="@Model.Events.Id" />
         <div class="form-group row p-1">
             <label asp-for="companyParticipantsModel.Nimi" class="col-lg-4 col-form-label">@Html.DisplayNameFor(model => model.companyParticipantsModel.Nimi):</label>
             <div class="col-sm-8">
