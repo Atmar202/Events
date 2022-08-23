@@ -1,6 +1,7 @@
 ﻿using Events.Data;
 using Events.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore;
 
 namespace Events.Controllers
@@ -21,6 +22,8 @@ namespace Events.Controllers
                 return NotFound();
             }
 
+            var addEvents = await _context.AddEvents.FirstOrDefaultAsync(m => m.Id == id);
+
             var privateParticipants = await _context.PrivateParticipants.FindAsync(id);
 
             if (privateParticipants == null)
@@ -28,15 +31,22 @@ namespace Events.Controllers
                 return NotFound();
             }
 
-            return View(privateParticipants);
+            EventsDetailsViewModel viewModel = await GetEventsDetailsViewModel(addEvents);
+
+            viewModel.privateParticipantsModel = privateParticipants;
+
+            return View(viewModel);
         }
 
-        public async Task<IActionResult> CompanyParticipant(int? id)
+            public async Task<IActionResult> CompanyParticipant(int? id)
         {
+
             if (id == null || _context.CompanyParticipants == null)
             {
                 return NotFound();
             }
+
+            var addEvents = await _context.AddEvents.FirstOrDefaultAsync(m => m.Id == id);
 
             var companyParticipants = await _context.CompanyParticipants.FindAsync(id);
 
@@ -45,7 +55,11 @@ namespace Events.Controllers
                 return NotFound();
             }
 
-            return View(companyParticipants);
+            EventsDetailsViewModel viewModel = await GetEventsDetailsViewModel(addEvents);
+
+            viewModel.companyParticipantsModel = companyParticipants;
+
+            return View(viewModel);
         }
 
         /*

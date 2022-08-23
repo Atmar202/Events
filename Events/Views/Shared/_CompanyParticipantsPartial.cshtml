@@ -1,9 +1,7 @@
 ﻿@model Events.Models.EventsDetailsViewModel
 
-<div id="juriidiline" style="display:none;">
-    <form action="@Url.Action("CreateCompanyParticipant")" method="post">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="EventsId" value="@Model.Events.Id" />
+        <input type="hidden" asp-for="EventsId" value="@Model.Events?.Id" />
         <div class="form-group row p-1">
             <label asp-for="companyParticipantsModel.Nimi" class="col-lg-4 col-form-label">@Html.DisplayNameFor(model => model.companyParticipantsModel.Nimi):</label>
             <div class="col-sm-8">
@@ -46,5 +44,3 @@
             <a onclick="history.back()" class="btn py-1 m-1" style="background-color: #e1e1e1;">Tagasi</a>
             <button type="submit" class="btn text-white py-1 m-1" style="background-color: var(--bg);">Salvesta</button>
         </div>
-    </form>
-</div>

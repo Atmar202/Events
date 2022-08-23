@@ -86,8 +86,18 @@
                 </div>
             </div>
 
-        <partial name="_PrivateParticipantsPartial" model="Model" />
+       <div id="eraisik" style="display:none;">
+    <form action="@Url.Action("CreatePrivateParticipant")" method="post">
+         <partial name="_PrivateParticipantsPartial" model="Model" />
+    </form>
+        </div>
+
+        <div id="juriidiline" style="display:none;">
+    <form action="@Url.Action("CreateCompanyParticipant")" method="post">
         <partial name="_CompanyParticipantsPartial" model="Model" />
+        </form>
+    </div>
+
     </div>
 </div>
 
