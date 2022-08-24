@@ -191,7 +191,7 @@ namespace Events.Controllers
                 _context.CompanyParticipants.Add(companyParticipants);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details), new { id = addEvents.Id });
             }
 
             viewModel = await GetEventsDetailsViewModel(addEvents);
@@ -223,7 +223,7 @@ namespace Events.Controllers
                 _context.PrivateParticipants.Add(privateParticipants);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details), new { id = addEvents.Id });
             }
 
             viewModel = await GetEventsDetailsViewModel(addEvents);

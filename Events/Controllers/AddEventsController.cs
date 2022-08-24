@@ -138,7 +138,7 @@ namespace Events.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nimi,Toimumisaeg,Koht,lisainfo")] AddEvents addEvents)
+        public async Task<IActionResult> Create([Bind("Id,Nimi,Toimumisaeg,Koht,Lisainfo")] AddEvents addEvents)
         {
             if (ModelState.IsValid)
             {
@@ -171,7 +171,7 @@ namespace Events.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nimi,Toimumisaeg,Koht,lisainfo")] AddEvents addEvents)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nimi,Toimumisaeg,Koht,Lisainfo")] AddEvents addEvents)
         {
             if (id != addEvents.Id)
             {
@@ -196,7 +196,7 @@ namespace Events.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Admin));
             }
             return View(addEvents);
         }
@@ -235,7 +235,7 @@ namespace Events.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Admin));
         }
 
         private bool AddEventsExists(int id)

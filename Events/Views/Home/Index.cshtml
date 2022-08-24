@@ -1,6 +1,8 @@
 ﻿@model IEnumerable<Events.Models.AddEvents>
 
 @{
+    int i = 1;
+
     ViewData["Title"] = "Avaleht";
 }
 
@@ -13,7 +15,7 @@
         </h4>
     </div>
     <div class="col">
-        <img src="~/img/pilt.jpg" class="img-fluid" width="648" height="319" alt="Pilt">
+        <img src="~/img/pilt.jpg" class="w-100 h-100" alt="Pilt">
     </div>
 </div>
 
@@ -25,54 +27,58 @@
         {
             @if (item.Toimumisaeg > DateTime.Now)
             {
-                <div class="row g-0 pt-3">
-                    <div class="col p-1">
-                        <ol style="list-style-type:none;">
-                            <li>@Html.DisplayFor(modelItem => item.Nimi)</li>
-                        </ol>
+                <small>
+                    <div class="row g-0 px-4">
+                        <div class="col p-1">
+                        @(i++). @Html.DisplayFor(modelItem => item.Nimi)
             </div>
-            <div class="col p-1">
-                 @item.Toimumisaeg.ToString("dd.MM.yyyy")
+                        <div class="col col-lg-2 p-1 d-flex align-items-start justify-content-center">
+                        @item.Toimumisaeg.ToString("dd.MM.yyyy")
             </div>
-              <form class="col p-1 opacity-50" asp-route-id="@item.Id" asp-action="Delete" method="post">
-                    <a asp-action="Details" asp-controller="Participants" asp-route-id="@item.Id" class="text-decoration-none text-uppercase text-dark fw-bold">Osavõtjad</a>
-                   <input type="image" src="../Img/remove.svg" width="32" height="22" asp-for="@item.Id" class="ps-2" />
-              </form>
+
+                        <form class="col col-lg-3 p-1 d-flex align-items-start justify-content-end" asp-route-id="@item.Id" asp-action="Delete" method="post">
+                            <a asp-action="Details" asp-controller="Participants" asp-route-id="@item.Id" class="text-decoration-none opacity-50 text-uppercase text-dark fw-bold">Osavõtjad</a>
+                    <input type="image" src="../Img/remove.svg" width="24" height="24" asp-for="@item.Id" class="ps-2 opacity-50" />
+                   </form>
             </div>
+                </small>
             }
 
-            <!-- Should display on the bottom
-            if(item == Model.Last()) {
-                <div class="p-3">
-                    <a class="text-uppercase text-dark fw-bold opacity-50 text-decoration-none" asp-area="" asp-controller="AddEvents" asp-action="Index">Lisa üritus</a>
-                </div>
+            @if (DateTime.Now > item.Toimumisaeg)
+            {
+                <div class="p-3"></div>
             }
-            -->
         }
+
         <div class="p-3">
-            <a class="text-uppercase text-dark fw-bold opacity-50 text-decoration-none" asp-area="" asp-controller="AddEvents" asp-action="Index">Lisa üritus</a>
+            <a class="text-uppercase text-dark fw-bold opacity-50 text-decoration-none" asp-controller="AddEvents" asp-action="Index">Lisa üritus</a>
         </div>
        
     </div>
+
+
+    @{
+        i = 1;
+    }
     <div class="col ms-3 bg-white">
         <h4 class="bg py-3 text-center text-white">Toimunud üritused</h4>
         @foreach (var item in Model.OrderByDescending(item => item.Toimumisaeg))
         {
             @if (DateTime.Now > item.Toimumisaeg)
             {
-        <div class="row g-0 pt-3">
+                <small>
+        <div class="row g-0 px-4">
             <div class="col p-1">
-             <ol style="list-style-type:none;">
-                 <li>@Html.DisplayFor(modelItem => item.Nimi)</li>
-                </ol>
+                @(i++). @Html.DisplayFor(modelItem => item.Nimi)
             </div>
-            <div class="col p-1">
+                 <div class="col col-lg-2 p-1 d-flex align-items-start justify-content-center">
                  @item.Toimumisaeg.ToString("dd.MM.yyyy")
             </div>
-            <div class="col p-1 opacity-50">
+                <div class="col col-lg-3 p-1 d-flex align-items-start justify-content-end opacity-50">
                 <a class="text-decoration-none text-uppercase text-dark fw-bold" asp-action="Details" asp-controller="Participants" asp-route-id="@item.Id">Osavõtjad</a>
             </div>
         </div>
+                </small>
             }
         }
     </div>
