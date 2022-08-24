@@ -22,7 +22,7 @@
             <div class="form-group row p-1">
                 <label asp-for="Toimumisaeg" class="col-lg-4 col-form-label">@Html.DisplayNameFor(model => model.Toimumisaeg):</label>
                 <div class="col-sm-8">
-                    <input asp-for="Toimumisaeg" class="form-control" />
+                    <input asp-for="Toimumisaeg" class="form-control bg-white datetimepicker" type="datetime" placeholder="pp.kk.aaaa hh:mm" autocomplete="off" readonly/>
                     <span asp-validation-for="Toimumisaeg" class="text-danger"></span>
                 </div>
             </div>
@@ -48,8 +48,27 @@
     </div>
 </div>
 
+<link href="~/lib/jquery-datetimepicker/jquery.datetimepicker.css" rel="stylesheet" />
+<link href="~/lib/jquery-datetimepicker/jquery.datetimepicker.min.css" rel="stylesheet" />
+
 @section Scripts {
+
+    <script src="~/lib/jquery-datetimepicker/jquery.datetimepicker.full.js"></script>
+    <script src="~/lib/jquery-datetimepicker/jquery.datetimepicker.full.min.js"></script>
+    <script src="~/lib/jquery-datetimepicker/jquery.datetimepicker.js"></script>
+    <script src="~/lib/jquery-datetimepicker/jquery.datetimepicker.min.js"></script>
+
+    <script>
+
+        $(function () {
+          $(".datetimepicker").datetimepicker({
+              format: "d.m.Y H:i",
+              theme: 'dark'
+            });
+        });
+
+    </script>
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-    }
+}
