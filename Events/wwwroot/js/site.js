@@ -4,10 +4,10 @@ switch (page[1].toLowerCase()) {
     case '':
     case 'home':
         document.getElementById("home").className = document.getElementById("home").className + " active";
-    break;
+        break;
     case 'addevents':
         document.getElementById("events").className = document.getElementById("events").className + " active";
-    break;
+        break;
 }
 
 function checkRadio() {

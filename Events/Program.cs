@@ -1,6 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Events.Data;
+﻿using Events.Data;
+using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<EventsContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("EventsContext") ?? throw new InvalidOperationException("Connection string 'EventsContext' not found.")));

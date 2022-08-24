@@ -1,8 +1,4 @@
-﻿using Events.Models;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Events.Models
+﻿namespace Events.Models
 {
     public class EventsDetailsViewModel
     {

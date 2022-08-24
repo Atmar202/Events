@@ -1,9 +1,7 @@
 ﻿using Events.Data;
 using Events.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace Events.Controllers
 {

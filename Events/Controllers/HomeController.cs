@@ -20,9 +20,9 @@ namespace Events.Controllers
 
         public async Task<IActionResult> Index()
         {
-                return _context.AddEvents != null ?
-                              View(await _context.AddEvents.ToListAsync()) :
-                              Problem("Entity set 'EventsContext.AddEvents'  is null.");
+            return _context.AddEvents != null ?
+                          View(await _context.AddEvents.ToListAsync()) :
+                          Problem("Entity set 'EventsContext.AddEvents'  is null.");
         }
 
         [HttpPost, ActionName("Delete")]

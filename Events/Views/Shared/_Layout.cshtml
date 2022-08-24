@@ -13,61 +13,61 @@
 <body>
     <div class="container my-4">
 
-    <!-- HEADER -->
-    <header class="d-flex flex-wrap justify-content-center mb-4 px-5 bg-white">
-        <img src="~/img/logo.svg" class="pe-5" alt="Logo" />
-        <div class="d-flex px-5 mb-3 mb-md-0 me-md-auto text-uppercase fw-bold">
+        <!-- HEADER -->
+        <header class="d-flex flex-wrap justify-content-center mb-4 px-5 bg-white">
+            <img src="~/img/logo.svg" class="pe-5" alt="Logo" />
+            <div class="d-flex px-5 mb-3 mb-md-0 me-md-auto text-uppercase fw-bold">
                 <a class="p-4 nav-link text-dark" id="home" asp-area="" asp-controller="Home" asp-action="Index">Avaleht</a>
                 <a class="p-4 nav-link text-dark" id="events" asp-area="" asp-controller="AddEvents" asp-action="Index">Ürituse lisamine</a>
-        </div>
-        <img src="~/img/symbol.svg" alt="Symbol" />
-    </header>
+            </div>
+            <img src="~/img/symbol.svg" alt="Symbol" />
+        </header>
 
-    <main role="main">
-        @RenderBody()
-    </main>
+        <main role="main">
+            @RenderBody()
+        </main>
 
 
-    <!-- FOOTER -->
-    <footer>
-        <div class="row p-5 g-0 text-white">
-            <div class="col">
-                <h2>Curabitur</h2>
-                <ul style="list-style-type:none; padding: 0" class="text-white-50">
-                    <li>Emauris</li>
-                    <li>Kfringla</li>
-                    <li>Oin magna sem</li>
-                    <li>Kelementum</li>
-                </ul>
+        <!-- FOOTER -->
+        <footer>
+            <div class="row p-5 g-0 text-white">
+                <div class="col">
+                    <h2>Curabitur</h2>
+                    <ul style="list-style-type:none; padding: 0" class="text-white-50">
+                        <li>Emauris</li>
+                        <li>Kfringla</li>
+                        <li>Oin magna sem</li>
+                        <li>Kelementum</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h2>Fusce</h2>
+                    <ul style="list-style-type:none; padding: 0" class="text-white-50">
+                        <li>Econsectetur</li>
+                        <li>Ksollicitudin</li>
+                        <li>Omvulputate</li>
+                        <li>Nunc fringilla tellu</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h2>Kontakt</h2>
+                    <ul style="list-style-type:none; padding: 0" class="text-white-50">
+                        <li class="fw-bold">Peakontor: Tallinnas</li>
+                        <li>Väike-Ameerika 1, 11415 Tallinn</li>
+                        <li>Telefon: 605 4450</li>
+                        <li>Faks: 605 3186</li>
+                    </ul>
+                </div>
+                <div class="col pt-5">
+                    <ul style="list-style-type:none; padding: 0" class="text-white-50">
+                        <li class="fw-bold">Harukontor: Võrus</li>
+                        <li>Oja tn 7 (külastusaadress)</li>
+                        <li>Telefon: 605 3330</li>
+                        <li>Faks: 605 3155</li>
+                    </ul>
+                </div>
             </div>
-            <div class="col">
-                <h2>Fusce</h2>
-                <ul style="list-style-type:none; padding: 0" class="text-white-50">
-                    <li>Econsectetur</li>
-                    <li>Ksollicitudin</li>
-                    <li>Omvulputate</li>
-                    <li>Nunc fringilla tellu</li>
-                </ul>
-            </div>
-            <div class="col">
-                <h2>Kontakt</h2>
-                <ul style="list-style-type:none; padding: 0" class="text-white-50">
-                    <li class="fw-bold">Peakontor: Tallinnas</li>
-                    <li>Väike-Ameerika 1, 11415 Tallinn</li>
-                    <li>Telefon: 605 4450</li>
-                    <li>Faks: 605 3186</li>
-                </ul>
-            </div>
-            <div class="col pt-5">
-                <ul style="list-style-type:none; padding: 0" class="text-white-50">
-                    <li class="fw-bold">Harukontor: Võrus</li>
-                    <li>Oja tn 7 (külastusaadress)</li>
-                    <li>Telefon: 605 3330</li>
-                    <li>Faks: 605 3155</li>
-                </ul>
-            </div>
-        </div>
-    </footer>
+        </footer>
 
     </div>
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>

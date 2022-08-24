@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Events.Models;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Events.Data
 {
     public class EventsContext : DbContext
     {
-        public EventsContext (DbContextOptions<EventsContext> options)
+        public EventsContext(DbContextOptions<EventsContext> options)
             : base(options)
         {
         }

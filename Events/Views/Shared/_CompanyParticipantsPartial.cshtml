@@ -1,46 +1,46 @@
 ﻿@model Events.Models.EventsDetailsViewModel
 
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="EventsId" value="@Model.Events.Id" />
-        <div class="form-group row p-1">
-            <label asp-for="companyParticipantsModel.Nimi" class="col-lg-4 col-form-label">@Html.DisplayNameFor(model => model.companyParticipantsModel.Nimi):</label>
-            <div class="col-sm-8">
-            <input asp-for="companyParticipantsModel.Nimi" class="form-control" />
-            <span asp-validation-for="companyParticipantsModel.Nimi" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group row p-1">
-            <label asp-for="companyParticipantsModel.Registrikood" class="col-lg-4 col-form-label">@Html.DisplayNameFor(model => model.companyParticipantsModel.Registrikood):</label>
-            <div class="col-sm-8">
-            <input asp-for="companyParticipantsModel.Registrikood" class="form-control" />
-            <span asp-validation-for="companyParticipantsModel.Registrikood" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group row p-1">
-            <label asp-for="companyParticipantsModel.Osavõtjate_arv" class="col-lg-4 col-form-label">@Html.DisplayNameFor(model => model.companyParticipantsModel.Osavõtjate_arv):</label>
-            <div class="col-sm-8">
-            <input asp-for="companyParticipantsModel.Osavõtjate_arv" class="form-control" />
-            <span asp-validation-for="companyParticipantsModel.Osavõtjate_arv" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group row p-1">
-            <label asp-for="companyParticipantsModel.Maksmiseviis" class="col-lg-4 col-form-label">@Html.DisplayNameFor(model => model.companyParticipantsModel.Maksmiseviis):</label>
-            <div class="col-sm-8">
-            <select asp-for="companyParticipantsModel.Maksmiseviis" class="form-select">
-                <option>Sularaha</option>
-                <option>Pangaülekanne</option>
-            </select>
-            <span asp-validation-for="companyParticipantsModel.Maksmiseviis" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group row p-1">
-            <label asp-for="companyParticipantsModel.Lisainfo" class="col-lg-4 col-form-label">@Html.DisplayNameFor(model => model.companyParticipantsModel.Lisainfo):</label>
-            <div class="col-sm-8">
-                <textarea asp-for="companyParticipantsModel.Lisainfo" class="form-control"></textarea>
-                <span asp-validation-for="companyParticipantsModel.Lisainfo" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="mt-5">
-            <a onclick="history.back()" class="btn py-1 m-1" style="background-color: #e1e1e1;">Tagasi</a>
-            <button type="submit" class="btn text-white py-1 m-1" style="background-color: var(--bg);">Salvesta</button>
-        </div>
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<input type="hidden" asp-for="EventsId" value="@Model.Events.Id" />
+<div class="form-group row p-1">
+    <label asp-for="companyParticipantsModel.Nimi" class="col-lg-4 col-form-label">@Html.DisplayNameFor(model => model.companyParticipantsModel.Nimi):</label>
+    <div class="col-sm-8">
+        <input asp-for="companyParticipantsModel.Nimi" class="form-control" />
+        <span asp-validation-for="companyParticipantsModel.Nimi" class="text-danger"></span>
+    </div>
+</div>
+<div class="form-group row p-1">
+    <label asp-for="companyParticipantsModel.Registrikood" class="col-lg-4 col-form-label">@Html.DisplayNameFor(model => model.companyParticipantsModel.Registrikood):</label>
+    <div class="col-sm-8">
+        <input asp-for="companyParticipantsModel.Registrikood" class="form-control" />
+        <span asp-validation-for="companyParticipantsModel.Registrikood" class="text-danger"></span>
+    </div>
+</div>
+<div class="form-group row p-1">
+    <label asp-for="companyParticipantsModel.Osavõtjate_arv" class="col-lg-4 col-form-label">@Html.DisplayNameFor(model => model.companyParticipantsModel.Osavõtjate_arv):</label>
+    <div class="col-sm-8">
+        <input asp-for="companyParticipantsModel.Osavõtjate_arv" class="form-control" />
+        <span asp-validation-for="companyParticipantsModel.Osavõtjate_arv" class="text-danger"></span>
+    </div>
+</div>
+<div class="form-group row p-1">
+    <label asp-for="companyParticipantsModel.Maksmiseviis" class="col-lg-4 col-form-label">@Html.DisplayNameFor(model => model.companyParticipantsModel.Maksmiseviis):</label>
+    <div class="col-sm-8">
+        <select asp-for="companyParticipantsModel.Maksmiseviis" class="form-select">
+            <option>Sularaha</option>
+            <option>Pangaülekanne</option>
+        </select>
+        <span asp-validation-for="companyParticipantsModel.Maksmiseviis" class="text-danger"></span>
+    </div>
+</div>
+<div class="form-group row p-1">
+    <label asp-for="companyParticipantsModel.Lisainfo" class="col-lg-4 col-form-label">@Html.DisplayNameFor(model => model.companyParticipantsModel.Lisainfo):</label>
+    <div class="col-sm-8">
+        <textarea asp-for="companyParticipantsModel.Lisainfo" class="form-control"></textarea>
+        <span asp-validation-for="companyParticipantsModel.Lisainfo" class="text-danger"></span>
+    </div>
+</div>
+<div class="mt-5">
+    <a onclick="history.back()" class="btn py-1 m-1" style="background-color: #e1e1e1;">Tagasi</a>
+    <button type="submit" class="btn text-white py-1 m-1" style="background-color: var(--bg);">Salvesta</button>
+</div>
